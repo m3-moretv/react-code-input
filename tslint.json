@@ -1,0 +1,53 @@
+{
+  "defaultSeverity": "error",
+  "rulesDirectory": ["tslint-react", "tslint-config-prettier"],
+  "linterOptions": {
+    "exclude": [
+      "*.d.ts",
+      "**/*.test.*",
+      "config/**/*.js",
+      "node_modules/**/*.ts",
+      "coverage/lcov-report/*.js"
+    ]
+  },
+  "rules": {
+    "prettier": true,
+    "quotemark": [true, "single", "jsx-double"],
+    "no-var-requires": true,
+    "no-magic-numbers": true,
+    "no-console": false,
+    "no-debugger": false,
+    "ordered-imports": false,
+    "prefer-function-over-method": [true, "allow-public", "allow-protected"],
+    "no-boolean-literal-compare": true,
+    "interface-name": [true, "always-prefix"],
+    "class-name": true,
+    "arrow-return-shorthand": true,
+    "array-type": [true, "array-simple"],
+    "deprecation": true,
+    "indent": [true, "spaces", 2],
+    "max-classes-per-file": [true, 2],
+    "max-file-line-count": [true, 350],
+    "no-duplicate-imports": true,
+    "prefer-const": true,
+    "no-arg": true,
+    "no-conditional-assignment": true,
+    "no-duplicate-super": true,
+    "no-duplicate-switch-case": true,
+    "no-duplicate-variable": true,
+    "no-eval": true,
+    "no-empty": [true, "allow-empty-catch"],
+    "no-string-throw": true,
+    "no-unnecessary-class": true,
+    "no-var-keyword": true,
+    "no-void-expression": [true, "ignore-arrow-function-shorthand"],
+    "switch-default": true,
+    "triple-equals": true,
+    "only-arrow-functions": [
+      true,
+      "allow-declarations",
+      "allow-named-functions"
+    ],
+    "no-parameter-reassignment": true
+  }
+}
