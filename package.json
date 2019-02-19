@@ -1,6 +1,6 @@
 {
-  "name": "react-codeinput",
-  "version": "0.1.0",
+  "name": "react-ts-codeinput",
+  "version": "1.0.0",
   "description": "Typescript implementation of some code/pin-code input",
   "repository": {
     "type": "git",
