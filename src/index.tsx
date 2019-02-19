@@ -141,11 +141,7 @@ const CodeInput: React.FC<ICodeInputProps> = ({
 
   const inputClasses = classNames(
     inputClassName,
-    invalidInputClassName
-      ? {
-          [invalidInputClassName]: !isValid
-        }
-      : null
+    invalidInputClassName && { [invalidInputClassName]: !isValid }
   );
 
   return (
