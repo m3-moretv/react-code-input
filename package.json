@@ -1,7 +1,6 @@
 {
   "name": "react-codeinput",
   "version": "0.1.0",
-  "private": true,
   "description": "Typescript implementation of some code/pin-code input",
   "repository": {
     "type": "git",
@@ -14,7 +13,8 @@
     "Code Input",
     "PinCode Input",
     "Typescript code input",
-    "hooks code input"
+    "hooks code input",
+    "react-code-input"
   ],
   "author": "Tsareff",
   "files": [
