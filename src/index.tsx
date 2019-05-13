@@ -7,8 +7,8 @@ const LEFT_ARROW_KEY = 37;
 const UP_ARROW_KEY = 38;
 const RIGHT_ARROW_KEY = 39;
 const DOWN_ARROW_KEY = 40;
-const E_KEY = 69;
-const DOT_KEY = 190;
+const E_SYMBOL = 'e';
+const DOT_SYMBOL = '.';
 
 export enum Types {
   text = 'text',
@@ -136,8 +136,13 @@ const CodeInput: React.FC<ICodeInputProps> = ({
         event.preventDefault();
         break;
 
-      case E_KEY:
-      case DOT_KEY:
+      default:
+        break;
+    }
+
+    switch (event.key) {
+      case E_SYMBOL:
+      case DOT_SYMBOL:
         if (type === Types.number) {
           event.preventDefault();
           break;
