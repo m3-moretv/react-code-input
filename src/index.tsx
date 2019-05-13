@@ -54,10 +54,14 @@ const CodeInput: React.FC<ICodeInputProps> = ({
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const target = event.target;
-    const value = target.value;
+    let value = target.value;
 
     if (value === '') {
       return;
+    }
+
+    if (type === Types.number) {
+      value = value.replace(/[^\d]/g, '');
     }
 
     const currInputIndex = Number(target.dataset.id);
