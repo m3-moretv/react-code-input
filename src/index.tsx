@@ -1,14 +1,21 @@
 import React, { useState, useRef, KeyboardEvent, FocusEvent } from 'react';
 import classNames from 'classnames';
-import { moveToNewTarget, uuid, defaultOnFocus, fillEmptyArray } from './utils';
+import {
+  moveToNewTarget,
+  uuid,
+  defaultOnFocus,
+  fillEmptyArray,
+  updateFocus
+} from './utils';
 
 const BACKSPACE_KEY = 8;
 const LEFT_ARROW_KEY = 37;
 const UP_ARROW_KEY = 38;
 const RIGHT_ARROW_KEY = 39;
 const DOWN_ARROW_KEY = 40;
-const E_SYMBOL = 'e';
-const DOT_SYMBOL = '.';
+const E_KEY = 69;
+const DOT_KEY = 190;
+const COMMA_KEY = 188;
 
 export enum Types {
   text = 'text',
@@ -48,6 +55,10 @@ const CodeInput: React.FC<ICodeInputProps> = ({
 }) => {
   const [inputsValues, setInputsValues] = useState<string[]>(
     fillEmptyArray(fields).map((element, i) => value.split('')[i] || element)
+  );
+
+  const [inputsKeys, setInputsKeys] = useState<string[]>(
+    fillEmptyArray(fields).map((element, i) => uuid())
   );
 
   const inputsRefs = inputsValues.map(() =>
@@ -98,20 +109,30 @@ const CodeInput: React.FC<ICodeInputProps> = ({
     const currInputIndex = Number(target.dataset.id);
     const nextInput = inputsRefs[currInputIndex + 1];
     const prevInput = inputsRefs[currInputIndex - 1];
+    const currInput = inputsRefs[currInputIndex];
 
     switch (event.keyCode) {
       case BACKSPACE_KEY:
-        event.preventDefault();
         const copiedInputsValues = inputsValues.slice();
         copiedInputsValues[currInputIndex] = '';
+        //to completely update input; helpfull on adroid when comma not beeing registered
+        const newKeys = inputsKeys.slice();
+        newKeys[currInputIndex] = uuid();
+
         setInputsValues(copiedInputsValues);
+        setInputsKeys(newKeys);
+
         if (prevInput) {
           moveToNewTarget(prevInput);
+        } else {
+          updateFocus(currInput);
         }
+
         if (onChange) {
           const fullValue = copiedInputsValues.join('');
           onChange(fullValue);
         }
+
         break;
 
       case LEFT_ARROW_KEY:
@@ -136,13 +157,9 @@ const CodeInput: React.FC<ICodeInputProps> = ({
         event.preventDefault();
         break;
 
-      default:
-        break;
-    }
-
-    switch (event.key) {
-      case E_SYMBOL:
-      case DOT_SYMBOL:
+      case E_KEY:
+      case DOT_KEY:
+      case COMMA_KEY:
         if (type === Types.number) {
           event.preventDefault();
           break;
@@ -169,7 +186,7 @@ const CodeInput: React.FC<ICodeInputProps> = ({
             data-id={i}
             autoFocus={autoFocus && i === 0}
             value={value}
-            key={`input-${i}`}
+            key={inputsKeys[i]}
             type={type}
             disabled={disabled}
             className={inputClasses}
@@ -177,6 +194,7 @@ const CodeInput: React.FC<ICodeInputProps> = ({
             onChange={handleChange}
             onKeyDown={handleKeyDown}
             onFocus={onFocus}
+            pattern={type === Types.number ? '[0-9]*' : undefined}
           />
         );
       })}

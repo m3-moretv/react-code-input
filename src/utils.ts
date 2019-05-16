@@ -15,6 +15,16 @@ export const moveToNewTarget: (
   }
 };
 
+export const updateFocus: (
+  target: RefObject<HTMLInputElement>
+) => void = target => {
+  setTimeout(() => {
+    if (target.current) {
+      target.current.focus();
+    }
+  }, 0);
+};
+
 export const defaultOnFocus: (
   event: FocusEvent<HTMLInputElement>
 ) => void = event => {
