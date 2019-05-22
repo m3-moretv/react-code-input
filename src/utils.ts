@@ -22,7 +22,7 @@ export const updateFocus: (
     if (target.current) {
       target.current.focus();
     }
-  }, 100);
+  }, 10);
 };
 
 export const defaultOnFocus: (
